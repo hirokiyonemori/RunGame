@@ -14,16 +14,39 @@ public class ItemCreate : MonoBehaviour
     private int startPos = -160;
     //ゴール地点
     private int goalPos = 120;
+
+    //ステージチップの配列
+    public GameObject[] stageTips;
+
+    //int型を変数StageTipSizeで宣言します。
+    const int STAGE_TIP_SIZE = 32;
+
     //アイテムを出すx方向の範囲
     private float posRange = 3.4f;
     //作ったステージを削除
     public List<GameObject> generatedStageList = new List<GameObject>();
 
+    //ターゲットキャラクターの指定が出来る様にするよ
+    public Transform character;
+
+    //自動生成する時に使う変数startTipIndex
+    public int startTipIndex;
+    //ステージ生成の先読み個数
+    public int preInstantiate;
+
+    const int CAR = 0;
+    const int COIN = 1;
+    const int CONE = 2;
+
+    //int型を変数currentTipIndexで宣言します。
+    int currentTipIndex;
+
+
 
     // Use this for initialization
     void Start()
     {
-        //一定の距離ごとにアイテムを生成
+        /*//一定の距離ごとにアイテムを生成
         for (int i = startPos; i < goalPos; i += 15)
         {
             //どのアイテムを出すのかをランダムに設定
@@ -35,7 +58,6 @@ public class ItemCreate : MonoBehaviour
                 {
                     GameObject cone = Instantiate(conePrefab) as GameObject;
                     cone.transform.position = new Vector3(4 * j, cone.transform.position.y, i);
-                    generatedStageList.Add(cone);
                 }
             }
             else
@@ -54,44 +76,22 @@ public class ItemCreate : MonoBehaviour
                         //コインを生成
                         GameObject coin = Instantiate(coinPrefab) as GameObject;
                         coin.transform.position = new Vector3(posRange * j, coin.transform.position.y, i + offsetZ);
-                        generatedStageList.Add(coin);
                     }
                     else if (7 <= item && item <= 9)
                     {
                         //車を生成
                         GameObject car = Instantiate(carPrefab) as GameObject;
                         car.transform.position = new Vector3(posRange * j, car.transform.position.y, i + offsetZ);
-                        generatedStageList.Add(car);
                     }
                 }
             }
-        }
+        }*/
     }
-
-    //一番古いステージを削除します
-    void DestroyOldestStage()
-    {
-        GameObject oldStage = generatedStageList[0];
-        generatedStageList.RemoveAt(0);
-        Destroy(oldStage);
-    }
-
-    //int型を変数StageTipSizeで宣言します。
-    const int STAGE_TIP_SIZE = 4;
-    //int型を変数currentTipIndexで宣言します。
-    int currentTipIndex;
-    //ターゲットキャラクターの指定が出来る様にするよ
-    public Transform character;
-
-    public int startTipIndex;
-    //ステージ生成の先読み個数
-    public int preInstantiate;
-    //ステージチップの配列
-    public GameObject[] stageTips;
 
     // Update is called once per frame
     void Update()
     {
+
 
         //キャラクターの位置から現在のステージチップのインデックスを計算します
         int charaPositionIndex = (int)(character.position.z / STAGE_TIP_SIZE);
@@ -103,10 +103,12 @@ public class ItemCreate : MonoBehaviour
 
     }
 
+    
+
     GameObject GenerateStage(int tipIndex)
     {
         int nextStageTip = Random.Range(0, stageTips.Length);
-        int num = Random.Range(-5, 6);
+        int posX = Random.Range(-2, 2);
         int rot = 0;
         // 車の場合は回転処理を加える
         if(nextStageTip == 0)
@@ -114,22 +116,23 @@ public class ItemCreate : MonoBehaviour
             rot = -90;
 		}
         float pos_y = 1;
+        
 		switch (nextStageTip)
 		{
-            case 0:
+            case CAR:
                 pos_y = 0.2f;
                 break;
-            case 1:
+            case COIN:
                 pos_y = 1;
                 break;
-            case 2:
+            case CONE:
                 pos_y = 0;
                 break;
 
         }
         GameObject stageObject = (GameObject)Instantiate(
             stageTips[nextStageTip],
-            new Vector3(num, pos_y, tipIndex * STAGE_TIP_SIZE),
+            new Vector3(posX, pos_y, tipIndex * STAGE_TIP_SIZE),
             Quaternion.Euler(rot, 0, 0));
         return stageObject;
     }
@@ -138,6 +141,7 @@ public class ItemCreate : MonoBehaviour
     void UpdateStage(int toTipIndex)
     {
         if (toTipIndex <= currentTipIndex) return;
+
         //指定のステージチップまで生成するよ
         for (int i = currentTipIndex + 1; i <= toTipIndex; i++)
         {
@@ -149,5 +153,14 @@ public class ItemCreate : MonoBehaviour
         while (generatedStageList.Count > preInstantiate + 2) DestroyOldestStage();
 
         currentTipIndex = toTipIndex;
+
+    }
+
+    //一番古いステージを削除します
+    void DestroyOldestStage()
+    {
+        GameObject oldStage = generatedStageList[0];
+        generatedStageList.RemoveAt(0);
+        Destroy(oldStage);
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class StageController : MonoBehaviour
 {
     //int型を変数StageTipSizeで宣言します。
-    const int STAGE_TIP_SIZE = 4;
+    const int STAGE_TIP_SIZE = 32;
     //int型を変数currentTipIndexで宣言します。
     int currentTipIndex;
     //ターゲットキャラクターの指定が出来る様にするよ
@@ -19,11 +19,19 @@ public class StageController : MonoBehaviour
     //作ったステージチップの保持リスト
     public List<GameObject> generatedStageList = new List<GameObject>();
 
+    // 走った距離
+    public int runDistance;
+
+    public GameObject goalPrefab;
+
+    private bool goalFlag;
+
     void Start()
     {
         //初期化処理
         currentTipIndex = startTipIndex - 1;
         UpdateStage(preInstantiate);
+        goalFlag = false;
     }
 
 
@@ -31,6 +39,24 @@ public class StageController : MonoBehaviour
     {
         //キャラクターの位置から現在のステージチップのインデックスを計算します
         int charaPositionIndex = (int)(character.position.z / STAGE_TIP_SIZE);
+
+		// ゴールに来たらゴールのprefabを表示する
+		if (goalFlag)
+		{
+            return;
+		}
+        if(runDistance <= this.character.position.z )
+        {
+
+            //生成したステージチップを管理リストに追加して
+            GameObject stageObject = (GameObject)Instantiate(
+                goalPrefab,
+                new Vector3(0, 0, charaPositionIndex + preInstantiate * STAGE_TIP_SIZE),
+                Quaternion.Euler(0, 0, 0));
+
+            goalFlag = true;
+
+        }
         //次のステージチップに入ったらステージの更新処理を行います。
         if (charaPositionIndex + preInstantiate > currentTipIndex)
         {
