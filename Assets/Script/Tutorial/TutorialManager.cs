@@ -16,7 +16,7 @@ public class TutorialManager : MonoBehaviour
     protected List<ITutorialTask> tutorialTask;
 
     // チュートリアル表示フラグ
-    private bool isEnabled;
+    //private bool isEnabled;
 
     // チュートリアルタスクの条件を満たした際の遷移用フラグ
     private bool task_executed = false;
@@ -24,20 +24,30 @@ public class TutorialManager : MonoBehaviour
     // チュートリアル表示時のUI移動距離
     private float fade_pos_x = 460;
 
+    private float fade_pos_y = 90;
 
     [SerializeField]
     private bool tutorialFlag;
 
+    [SerializeField]
+    private GameObject obj;
+
     void Start()
     {
-        // チュートリアル表示用UIのインスタンス取得
-        //tutorialTextArea = GameObject.Find("TutorialTextArea").GetComponent<RectTransform>();
-        //TutorialTitle = tutorialTextArea.Find("Title").GetComponent<TextMeshPro>();
-        //TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<TextMeshPro>();
-        
+
+        fade_pos_x = 460 * Screen.width / 480;
+        fade_pos_y = 90 * Screen.height/ 800;
+
+        transform.localPosition = new Vector3(fade_pos_x, fade_pos_y, 0);
+
+
         tutorialFlag = ES3.Load<bool>("Tutorial");
         // チュートリアルが終わっている場合
-        if (tutorialFlag) return;
+        if (tutorialFlag)
+        {
+            tutorialTextArea.GetComponent<CanvasGroup>().alpha = 0;
+            return;
+        }
 
 
         // チュートリアルの一覧
@@ -46,15 +56,11 @@ public class TutorialManager : MonoBehaviour
             new MovementTask(),
             new JumpTask(),
             new EndTask(),
-            //new AttackTask2(),
+            
         };
 
         // 最初のチュートリアルを設定
         StartCoroutine(SetCurrentTask(tutorialTask.First()));
-
-        isEnabled = true;
-
-        SwitchEnabled();
     }
 
     void Update()
@@ -72,7 +78,6 @@ public class TutorialManager : MonoBehaviour
                         "position", tutorialTextArea.transform.position + new Vector3(fade_pos_x, 0, 0),
                         "time", 1f
                     ));
-
                     tutorialTask.RemoveAt(0);
 
                     var nextTask = tutorialTask.FirstOrDefault();
@@ -127,7 +132,7 @@ public class TutorialManager : MonoBehaviour
     /// </summary>
     protected void SwitchEnabled()
     {
-        isEnabled = !isEnabled;
+        //isEnabled = !isEnabled;
 
         // UIの表示切り替え
         //float alpha = isEnabled ? 1f : 0;
