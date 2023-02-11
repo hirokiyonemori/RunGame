@@ -1,97 +1,125 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StageController : MonoBehaviour
 {
-    //intŒ^‚ğ•Ï”StageTipSize‚ÅéŒ¾‚µ‚Ü‚·B
+    //intï¿½^ï¿½ï¿½Ïï¿½StageTipSizeï¿½ÅéŒ¾ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
     const int STAGE_TIP_SIZE = 32;
-    //intŒ^‚ğ•Ï”currentTipIndex‚ÅéŒ¾‚µ‚Ü‚·B
+    //intï¿½^ï¿½ï¿½Ïï¿½currentTipIndexï¿½ÅéŒ¾ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
     int currentTipIndex;
-    //ƒ^[ƒQƒbƒgƒLƒƒƒ‰ƒNƒ^[‚Ìw’è‚ªo—ˆ‚é—l‚É‚·‚é‚æ
+    //ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½^ï¿½[ï¿½Ìwï¿½è‚ªï¿½oï¿½ï¿½ï¿½ï¿½lï¿½É‚ï¿½ï¿½ï¿½ï¿½
     public Transform character;
-    //ƒXƒe[ƒWƒ`ƒbƒv‚Ì”z—ñ
+    //ï¿½Xï¿½eï¿½[ï¿½Wï¿½`ï¿½bï¿½vï¿½Ì”zï¿½ï¿½
     public GameObject[] stageTips;
-    //©“®¶¬‚·‚é‚Ég‚¤•Ï”startTipIndex
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½éï¿½Égï¿½ï¿½ï¿½Ïï¿½startTipIndex
     public int startTipIndex;
-    //ƒXƒe[ƒW¶¬‚Ìæ“Ç‚İŒÂ”
+    //ï¿½Xï¿½eï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½Ç‚İŒÂï¿½
     public int preInstantiate;
-    //ì‚Á‚½ƒXƒe[ƒWƒ`ƒbƒv‚Ì•ÛƒŠƒXƒg
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½eï¿½[ï¿½Wï¿½`ï¿½bï¿½vï¿½Ì•Ûï¿½ï¿½ï¿½ï¿½Xï¿½g
     public List<GameObject> generatedStageList = new List<GameObject>();
 
-    // ‘–‚Á‚½‹——£
+    // ã‚´ãƒ¼ãƒ«ã¾ã§ã®ãƒãƒƒãƒ—æ•°
     public int runDistance;
 
     public GameObject goalPrefab;
 
     private bool goalFlag;
 
+    [SerializeField]
+    private TextMeshProUGUI distanceCompanyText;
+
+    //ã€€ã‚´ãƒ¼ãƒ«ã¾ã§ã®è·é›¢ã‚’æ ¼ç´
+    private int goalDisCom;
+
     void Start()
     {
-        //‰Šú‰»ˆ—
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         currentTipIndex = startTipIndex - 1;
-        UpdateStage(preInstantiate);
+        //UpdateStage(preInstantiate);
         goalFlag = false;
+        runDistance = 10 + 10 * PlayerManager.instance.stageNo;
+        StageNo stageNo = (StageNo)PlayerManager.instance.stageNo;
+        switch (stageNo)
+        {
+            case StageNo.elementary:
+                runDistance = 10;
+                break;
+            case StageNo.intermediate:
+                runDistance = 10 + 10;
+                break;
+            case StageNo.senior:
+                runDistance = 10 + 100;
+                break;
+            case StageNo.Menguasai:
+                runDistance = 10 + 10000;
+                break;
+        }
+        //goalDisCom = (runDistance + preInstantiate * STAGE_TIP_SIZE -7 );
+        // 15ã¯ã‚´ãƒ¼ãƒ«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚ªãƒ•ã‚»ãƒƒãƒˆ
+        goalDisCom = runDistance  * STAGE_TIP_SIZE + 15;
     }
 
 
     void Update()
     {
-        //ƒLƒƒƒ‰ƒNƒ^[‚ÌˆÊ’u‚©‚çŒ»İ‚ÌƒXƒe[ƒWƒ`ƒbƒv‚ÌƒCƒ“ƒfƒbƒNƒX‚ğŒvZ‚µ‚Ü‚·
         int charaPositionIndex = (int)(character.position.z / STAGE_TIP_SIZE);
-
-		// ƒS[ƒ‹‚É—ˆ‚½‚çƒS[ƒ‹‚Ìprefab‚ğ•\¦‚·‚é
-		if (goalFlag)
+        int dis = goalDisCom - (int)(character.localPosition.z);
+        if (dis <= 0) dis = 0;
+        distanceCompanyText.text = ""+(dis);
+        
+        // ã‚´ãƒ¼ãƒ«ã¾ã§ããŸã‚‰è¡¨ç¤ºã—ãªã„
+        if (goalFlag)
 		{
             return;
 		}
-        if(runDistance <= this.character.position.z )
-        {
-
-            //¶¬‚µ‚½ƒXƒe[ƒWƒ`ƒbƒv‚ğŠÇ—ƒŠƒXƒg‚É’Ç‰Á‚µ‚Ä
-            GameObject stageObject = (GameObject)Instantiate(
-                goalPrefab,
-                new Vector3(0, 0, charaPositionIndex + preInstantiate * STAGE_TIP_SIZE),
-                Quaternion.Euler(0, 0, 0));
-
-            goalFlag = true;
-
-        }
-        //Ÿ‚ÌƒXƒe[ƒWƒ`ƒbƒv‚É“ü‚Á‚½‚çƒXƒe[ƒW‚ÌXVˆ—‚ğs‚¢‚Ü‚·B
+        //ï¿½ï¿½ï¿½ÌƒXï¿½eï¿½[ï¿½Wï¿½`ï¿½bï¿½vï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½eï¿½[ï¿½Wï¿½ÌXï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
         if (charaPositionIndex + preInstantiate > currentTipIndex)
         {
             UpdateStage(charaPositionIndex + preInstantiate);
         }
-
     }
-    //w’è‚ÌƒCƒ“ƒfƒbƒNƒX‚Ü‚Å‚ÌƒXƒe[ƒWƒ`ƒbƒv‚ğ¶¬‚µ‚ÄAŠÇ—‰º‚É‚¨‚­
+    
     void UpdateStage(int toTipIndex)
     {
         if (toTipIndex <= currentTipIndex) return;
-        //w’è‚ÌƒXƒe[ƒWƒ`ƒbƒv‚Ü‚Å¶¬‚·‚é‚æ
+        
         for (int i = currentTipIndex + 1; i <= toTipIndex; i++)
         {
             GameObject stageObject = GenerateStage(i);
-            //¶¬‚µ‚½ƒXƒe[ƒWƒ`ƒbƒv‚ğŠÇ—ƒŠƒXƒg‚É’Ç‰Á‚µ‚ÄA
+            
             generatedStageList.Add(stageObject);
         }
-        //ƒXƒe[ƒW•ÛãŒÀ‚É‚È‚é‚Ü‚ÅŒÃ‚¢ƒXƒe[ƒW‚ğíœ‚µ‚Ü‚·B
         while (generatedStageList.Count > preInstantiate + 2) DestroyOldestStage();
 
         currentTipIndex = toTipIndex;
     }
-    //w’è‚ÌƒCƒ“ƒfƒbƒNƒXˆÊ’u‚ÉstageƒIƒuƒWƒFƒNƒg‚ğƒ‰ƒ“ƒ_ƒ€‚É¶¬
+    
+    
     GameObject GenerateStage(int tipIndex)
     {
         int nextStageTip = Random.Range(0, stageTips.Length);
-
+        Debug.Log(" goalDisCom " + goalDisCom );
+        //Debug.Log(" tipIndex " + tipIndex );
+        if (tipIndex >= runDistance)
+        {
+            Debug.Log(" tipIndex " + tipIndex );
+            GameObject obj = (GameObject)Instantiate(
+                goalPrefab,
+                new Vector3(0, 0, tipIndex * STAGE_TIP_SIZE),
+                Quaternion.Euler(0, 90, 0));
+        
+            goalFlag = true;
+            return obj;
+        }
         GameObject stageObject = (GameObject)Instantiate(
             stageTips[nextStageTip],
             new Vector3(0, 0, tipIndex * STAGE_TIP_SIZE),
             Quaternion.Euler(0,90,0));
         return stageObject;
     }
-    //ˆê”ÔŒÃ‚¢ƒXƒe[ƒW‚ğíœ‚µ‚Ü‚·
+    //ï¿½ï¿½ÔŒÃ‚ï¿½ï¿½Xï¿½eï¿½[ï¿½Wï¿½ï¿½ï¿½íœï¿½ï¿½ï¿½Ü‚ï¿½
     void DestroyOldestStage()
     {
         GameObject oldStage = generatedStageList[0];

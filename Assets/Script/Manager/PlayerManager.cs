@@ -2,10 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum StageNo
+{
+    elementary = 0,
+    intermediate= 1,
+    senior = 2,
+    Menguasai = 3,
+}
 public class PlayerManager : MonoBehaviour
 {
 
     public static PlayerManager instance;
+    public int stageNo = 0;
     private void Awake()
     {
         if (instance == null)
@@ -23,6 +31,6 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Setup");
     }
 
-    public int stageNo = 0;
+    
 
 }

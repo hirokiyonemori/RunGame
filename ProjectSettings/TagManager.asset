@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Goal
   - Ground
+  - Coin
+  - CarTag
+  - TrafficConeTag
+  - GoalTag
+  - Goal
   layers:
   - Default
   - TransparentFX
@@ -42,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1132217975
     locked: 0

@@ -5,38 +5,38 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //ƒAƒjƒ[ƒVƒ‡ƒ“‚·‚é‚½‚ß‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ“ü‚ê‚é
+    //ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
     private Animator m_Animator;
 
-    //Unity‚¿‚á‚ñ‚ğˆÚ“®‚³‚¹‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ“ü‚ê‚é
+    //Unityï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
     private Rigidbody m_Rigidbody;
-    //‘Oi‚·‚é‚½‚ß‚Ì—Í
+    //ï¿½Oï¿½iï¿½ï¿½ï¿½é‚½ï¿½ß‚Ì—ï¿½
     private float forwardForce = 800.0f;
-    //¶‰E‚ÉˆÚ“®‚·‚é‚½‚ß‚Ì—Í
+    //ï¿½ï¿½ï¿½Eï¿½ÉˆÚ“ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚Ì—ï¿½
     private float turnForce = 500.0f;
     [SerializeField]
-    //ƒWƒƒƒ“ƒv‚·‚é‚½‚ß‚Ì—Í
+    //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½é‚½ï¿½ß‚Ì—ï¿½
 
     private float upForce = 5500.0f;
-    //¶‰E‚ÌˆÚ“®‚Å‚«‚é”ÍˆÍ
+    //ï¿½ï¿½ï¿½Eï¿½ÌˆÚ“ï¿½ï¿½Å‚ï¿½ï¿½ï¿½Íˆï¿½
     public float movableRange = 3.0f;
 
-    //“®‚«‚ğŒ¸‘¬‚³‚¹‚éŒW”i’Ç‰Áj
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½iï¿½Ç‰ï¿½ï¿½j
     private float coefficient = 0.95f;
 
-    //ƒQ[ƒ€I—¹‚Ì”»’èi’Ç‰Áj
+    //ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½Ì”ï¿½ï¿½ï¿½iï¿½Ç‰ï¿½ï¿½j
     private bool isEnd = false;
 
-    //ƒWƒƒƒ“ƒv‚µ‚Ä‚¢‚éê‡
+    //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡
     private bool m_IsJump = false;
 
 
     [SerializeField]
     private int life = 5;
 
-    //@ƒ‰ƒCƒtŠÇ—
+    //ï¿½@ï¿½ï¿½ï¿½Cï¿½tï¿½Ç—ï¿½
     [SerializeField]
     private List<GameObject> lifeObj;
 
@@ -48,67 +48,111 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI m_scoreText;
 
-    [SerializeField]
-    private GameObject mainCamera;
+    
 
-    [SerializeField]
-    private GameObject winCamera;
-
-
-    //AudioSourceŒ^‚Ì•Ï”audios‚ğéŒ¾‚µ‚Ü‚·B
+    //AudioSourceï¿½^ï¿½Ì•Ïï¿½audiosï¿½ï¿½éŒ¾ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
     [SerializeField]
     private GameObject gameClearObj;
 
 
 
-    //‰ä‚È‚ª‚ç”÷–­‚È–½–¼B
+    //ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È–ï¿½ï¿½ï¿½ï¿½B
     int countDown;
 
-    //Œo‰ßŠÔB
+    //ï¿½oï¿½ßï¿½ï¿½ÔB
     float countDownElapsedTime;
 
-    //ƒJƒEƒ“ƒgƒ_ƒEƒ“‚Ì’·‚³B‚±‚Ìê‡‚Í3•bB
+    //ï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½_ï¿½Eï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½Ìê‡ï¿½ï¿½3ï¿½bï¿½B
     float countDownDuration = 3.0f;
 
 
     [SerializeField]
     private TextMeshProUGUI countDownText;
 
-    //ˆÈ‰º‚ÍéŒ¾•¶
+    //ï¿½È‰ï¿½ï¿½ÍéŒ¾ï¿½ï¿½
     const float LOAD_WIDTH = 6f;
     const float MOVE_MAX = 3.5f;
     Vector3 previousPos, currentPos;
 
     bool isStart = false;
 
-    float posDiff = 0.5f; //xÀ•W‚Ì·‚Ì‚¢‚«’lB
+    float posDiff = 0.5f; //xï¿½ï¿½ï¿½Wï¿½Ìï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½lï¿½B
+
+    
+    private bool tutorialFlag;
+
+    [SerializeField]
+    TutorialManager tutorialManager;
+
+
 
     // Use this for initialization
     void Start()
     {
 
-        //‘–‚éƒAƒjƒ[ƒVƒ‡ƒ“‚ğŠJn
+        //ï¿½ï¿½ï¿½ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½n
 
         gameOverObj.active = false;
         m_score = 0;
-        mainCamera.active = true;
-        winCamera.active = false;
-        //”z—ñ•Ï”clip‚ÌƒCƒ“ƒfƒbƒNƒX‚ª‚O‚ÌAudio‚Ìƒtƒ@ƒCƒ‹‚ğÄ¶‚µ‚Ü‚·B
+        
+        
+        //ï¿½zï¿½ï¿½Ïï¿½clipï¿½ÌƒCï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½ï¿½ï¿½Oï¿½ï¿½Audioï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 
         AudioManager.instance.PlayBgm(1);
 
-        StartCoroutine("CountDown");
+        
         isStart = false;
+        tutorialFlag = ES3.Load<bool>("Tutorial");
+		if (tutorialFlag)
+		{
+            StartCoroutine("CountDown");
+		}
+		else
+		{
+            this.m_Animator.SetBool("Run", true);
+            countDownText.text = "";
+        }
 
+        StageNo stageNo = (StageNo) PlayerManager.instance.stageNo;
+        int _stageNo = PlayerManager.instance.stageNo;
+        string _name = SaveManager.STAGE_CLEAR;
+            
+        switch (stageNo)
+        {
+            // åˆç´š
+            case StageNo.elementary:
+            // ä¸­ç´š
+            case StageNo.intermediate:
+                speed = 10;
+                break;
+            //ã€€ä¸Šç´š
+            case StageNo.senior:
+                speed = 20;
+                break;
+            //ã€€ä¸Šç´š
+            default:
+                speed = 30;
+                break;
+        }
+        
     }
+    private float speed = 0;
     void Update()
     {
-        // ƒXƒ^[ƒg‚ğ‚µ‚Ä‚¢‚È‚¢‚Íˆ—‚ğ‚µ‚È‚¢
-		if (!isStart)
+
+		if (!tutorialFlag && tutorialManager.CheckTutorialEnd())
+		{
+            tutorialFlag = true;
+            StartCoroutine("CountDown");
+            ES3.Save<bool>("Tutorial", true);
+        }
+
+        // ã‚¹ã‚¿ãƒ¼ãƒˆ
+        if (!isStart && tutorialFlag)
 		{
             return;
 		}
-        //ƒQ[ƒ€I—¹‚È‚çUnity‚¿‚á‚ñ‚Ì“®‚«‚ğŒ¸Š‚·‚éi’Ç‰Áj
+        //ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½È‚ï¿½Unityï¿½ï¿½ï¿½ï¿½ï¿½Ì“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Ç‰ï¿½ï¿½j
         if (this.isEnd)
         {
             this.forwardForce *= this.coefficient;
@@ -121,44 +165,44 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        //ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚é‚Íˆ—‚ğÀs‚µ‚È‚¢
+        //ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½ó‚¯‚Ä‚ï¿½ï¿½éï¿½Íï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½È‚ï¿½
 		if (this.m_Animator.GetBool("Damage"))
 		{
             return;
 		}
         if ((Input.GetKeyDown(KeyCode.LeftArrow)) && -this.movableRange < this.transform.position.x)
         {
-            //¶‚ÉˆÚ“®i’Ç‰Áj
+            //ï¿½ï¿½ï¿½ÉˆÚ“ï¿½ï¿½iï¿½Ç‰ï¿½ï¿½j
             this.m_Rigidbody.AddForce(-this.turnForce, 0, 0);
         }
         else if ((Input.GetKey(KeyCode.RightArrow)) && this.transform.position.x < this.movableRange)
         {
-            //‰E‚ÉˆÚ“®i’Ç‰Áj
+            //ï¿½Eï¿½ÉˆÚ“ï¿½ï¿½iï¿½Ç‰ï¿½ï¿½j
             this.m_Rigidbody.AddForce(this.turnForce, 0, 0);
         }
 
-        // ƒXƒƒCƒv‚É‚æ‚éˆÚ“®ˆ—
+        // ï¿½Xï¿½ï¿½ï¿½Cï¿½vï¿½É‚ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½
         if (Input.GetMouseButtonDown(0))
         {
             previousPos = Input.mousePosition;
         }
         if (Input.GetMouseButton(0))
         {
-            // ƒXƒƒCƒv‚É‚æ‚éˆÚ“®‹——£‚ğæ“¾
+            // ï¿½Xï¿½ï¿½ï¿½Cï¿½vï¿½É‚ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
             currentPos = Input.mousePosition;
             float diffDistance = (currentPos.x - previousPos.x) / Screen.width * LOAD_WIDTH;
 
-            // Ÿ‚Ìƒ[ƒJƒ‹xÀ•W‚ğİ’è ¦“¹‚ÌŠO‚É‚Å‚È‚¢‚æ‚¤‚É
+            // ï¿½ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½Jï¿½ï¿½xï¿½ï¿½ï¿½Wï¿½ï¿½İ’ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ÌŠOï¿½É‚Å‚È‚ï¿½ï¿½æ‚¤ï¿½ï¿½
             float newX = Mathf.Clamp(transform.localPosition.x + diffDistance, -MOVE_MAX, MOVE_MAX);
-            //transform.localPosition = new Vector3(newX, 0, this.transform.localPosition.z);
+            transform.localPosition = new Vector3(newX, this.transform.localPosition.y, this.transform.localPosition.z);
 
-            // ƒ^ƒbƒvˆÊ’u‚ğXV
+            // ï¿½^ï¿½bï¿½vï¿½Ê’uï¿½ï¿½ï¿½Xï¿½V
             previousPos = currentPos;
         }
 
 
 
-        //JumpƒXƒe[ƒg‚Ìê‡‚ÍJump‚Éfalse‚ğƒZƒbƒg‚·‚é
+        //Jumpï¿½Xï¿½eï¿½[ï¿½gï¿½Ìê‡ï¿½ï¿½Jumpï¿½ï¿½falseï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
         /*
         if (this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
@@ -166,99 +210,150 @@ public class PlayerController : MonoBehaviour
         }*/
 
 
-        //ƒWƒƒƒ“ƒv‚µ‚Ä‚¢‚È‚¢‚ÉƒXƒy[ƒX‚ª‰Ÿ‚³‚ê‚½‚çƒWƒƒƒ“ƒv‚·‚é
-        //ƒWƒƒƒ“ƒv‚Ì”»’fŠî€
+        //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ÉƒXï¿½yï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½
+        //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Ì”ï¿½ï¿½fï¿½î€
         
-        if ( ( Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonUp(0) ) && this.transform.position.y < 0.5f)
+        //ï¿½Aï¿½Å‘Îï¿½
+        if ( ( Input.GetKeyDown(KeyCode.Space) 
+               || Input.GetMouseButtonUp(0) ) 
+             && this.transform.position.y < 0.5f )
         {
-            //ƒWƒƒƒ“ƒvƒAƒjƒ‚ğÄ¶
+            //ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Aï¿½jï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½
             this.m_Animator.SetBool("Jump", true);
             m_IsJump = true;
-            //Unity‚¿‚á‚ñ‚Éã•ûŒü‚Ì—Í‚ğ‰Á‚¦‚é
-            this.m_Rigidbody.AddForce(this.transform.up * this.upForce);
-
+            //Unityï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½Ì—Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            
+            this.m_Rigidbody.AddForce(new Vector3(0,upForce,0 ));
+            
             AudioManager.instance.PlaySe(0);
+            Debug.Log(" transform.position.y  " + transform.position.y );
         }
-
-
+        
+        if (!tutorialFlag) return;
+        // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íï¿½ï¿½sï¿½ï¿½ï¿½È‚ï¿½
         if (!m_IsJump  && !this.m_Animator.GetBool("Damage"))
-		{
-            Vector3 force = new Vector3(0.0f, 0.0f, 10.0f);    // —Í‚ğİ’è
-            this.m_Rigidbody.velocity = new Vector3(0, 0, 10);
+        {
+            this.m_Rigidbody.velocity = new Vector3(0, 0, speed);
         }
         
 
+    }
+
+    private bool isGround = false;
+    private void OnCollisionExit(Collision collision)
+    {
+        //ï¿½ï¿½Qï¿½ï¿½ï¿½ÉÕ“Ë‚ï¿½ï¿½ï¿½ï¿½ê‡ï¿½iï¿½Ç‰ï¿½ï¿½j
+        if ( collision.gameObject.tag == "Ground")
+        {
+            this.isGround = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //áŠQ•¨‚ÉÕ“Ë‚µ‚½ê‡i’Ç‰Áj
-        if ( m_IsJump && collision.gameObject.tag == "Ground")
+        //ï¿½ï¿½Qï¿½ï¿½ï¿½ÉÕ“Ë‚ï¿½ï¿½ï¿½ï¿½ê‡ï¿½iï¿½Ç‰ï¿½ï¿½j
+        if (  collision.gameObject.tag == "Ground")
         {
-            Debug.Log("Jump");
-            this.m_Animator.SetBool("Jump", false);
             
-            m_IsJump = false;
+            if (m_IsJump)
+            {
+                Debug.Log("Jump");
+                this.m_Animator.SetBool("Jump", false);
+            
+                m_IsJump = false;    
+            }
+            this.isGround = true;
         }
     }
 
-    //ƒgƒŠƒK[ƒ‚[ƒh‚Å‘¼‚ÌƒIƒuƒWƒFƒNƒg‚ÆÚG‚µ‚½ê‡‚Ìˆ—i’Ç‰Áj
+    //ï¿½gï¿½ï¿½ï¿½Kï¿½[ï¿½ï¿½ï¿½[ï¿½hï¿½Å‘ï¿½ï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ÆÚGï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Ìï¿½ï¿½ï¿½ï¿½iï¿½Ç‰ï¿½ï¿½j
     void OnTriggerEnter(Collider other)
     {
 
-        //áŠQ•¨‚ÉÕ“Ë‚µ‚½ê‡i’Ç‰Áj
+        //ï¿½ï¿½Qï¿½ï¿½ï¿½ÉÕ“Ë‚ï¿½ï¿½ï¿½ï¿½ê‡ï¿½iï¿½Ç‰ï¿½ï¿½j
         if (other.gameObject.tag == "CarTag" || other.gameObject.tag == "TrafficConeTag")
         {
-            // ƒ‰ƒCƒt‚ğŒ¸‚ç‚·
+            // plaerã®ãƒ©ã‚¤ãƒ•ã‚’å¼•ã
             life--;
-            
+            //ï¿½Õ“Ë‚ï¿½ï¿½é‰¹
+            AudioManager.instance.PlaySe(1);
             //lifeObj.Remove(lifeObj[0].gameObject);
             if (life <= 0)
-			{
+            {
+                life = 0;
                 this.m_Animator.SetBool("Down", true);
                 this.isEnd = true;
                 gameOverObj.active = true;
 
-                // ƒ‰ƒCƒt‚Ìƒn[ƒg‚ğ”ñ•\¦‚É‚·‚é
+                // ï¿½ï¿½ï¿½Cï¿½tï¿½Ìƒnï¿½[ï¿½gï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
                 lifeObj[life].active = false;
                 ES3.Save<int>("Coin", this.m_score);
             }
 			else
 			{
                 lifeObj[life].active = false;
-                // ƒRƒ‹[ƒ`ƒ“‚Ì‹N“®
                 StartCoroutine(DelayDamageAnimation());
             }
-            //ÚG‚µ‚½ƒRƒCƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğ”jŠü
+            //ï¿½ÚGï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½Cï¿½ï¿½ï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½jï¿½ï¿½
             Destroy(other.gameObject);
         }
-        //áŠQ•¨‚ÉÕ“Ë‚µ‚½ê‡i’Ç‰Áj
+        //ï¿½ï¿½Qï¿½ï¿½ï¿½ÉÕ“Ë‚ï¿½ï¿½ï¿½ï¿½ê‡ï¿½iï¿½Ç‰ï¿½ï¿½j
         if (other.gameObject.tag == "Coin")
         {
-            
-            //ƒ_ƒ[ƒW”»’è
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½é‰¹
+            AudioManager.instance.PlaySe(2);
+            //ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½
             //this.m_Animator.SetBool("Damage", true);
             m_score++;
-            m_scoreText.text = "Score" + m_score;
+            m_scoreText.text = "" + m_score;
 
-            //ÚG‚µ‚½ƒRƒCƒ“‚ÌƒIƒuƒWƒFƒNƒg‚ğ”jŠü
+            //ï¿½ÚGï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½Cï¿½ï¿½ï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½jï¿½ï¿½
             Destroy(other.gameObject);
         }
         
-        //ƒS[ƒ‹’n“_‚É“’B‚µ‚½ê‡i’Ç‰Áj
+        //ï¿½Sï¿½[ï¿½ï¿½ï¿½nï¿½_ï¿½É“ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½iï¿½Ç‰ï¿½ï¿½j
         if (other.gameObject.tag == "GoalTag")
         {
             this.isEnd = true;
-            //Œ»İ‚ÌƒRƒCƒ“‚ğŠi”[‚·‚é
+            //ï¿½ï¿½ï¿½İ‚ÌƒRï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½
             ES3.Save<int>("Coin", this.m_score);
             this.m_Animator.SetBool("Win", true);
 
-            mainCamera.active = false;
-            winCamera.active = true;
-            //”z—ñ•Ï”clip‚ÌƒCƒ“ƒfƒbƒNƒX‚ª‚O‚ÌAudio‚Ìƒtƒ@ƒCƒ‹‚ğÄ¶‚µ‚Ü‚·B
-            //audios.clip = clips[1];
-            //audios.Play();
-            AudioManager.instance.PlayBgm(1);
+            if (PlayerManager.instance.stageNo == (int)StageNo.elementary)
+            {
+                
+            }
+
+            StageNo stageNo = (StageNo) PlayerManager.instance.stageNo;
+            int _stageNo = PlayerManager.instance.stageNo;
+            string _name = SaveManager.STAGE_CLEAR;
+            
+            switch (stageNo)
+            {
+                // åˆç´š
+                case StageNo.elementary:
+                    SaveManager.instance.SaveBool( _name+ _stageNo,true);
+                    break;
+                // ä¸­ç´š
+                case StageNo.intermediate:
+                    if (m_score >= 5 )
+                    {
+                        SaveManager.instance.SaveBool( _name+ _stageNo,true);   
+                    }
+                    break;
+                //ã€€ä¸Šç´š
+                case StageNo.senior:
+                    if (m_score >= 10 )
+                    {
+                        SaveManager.instance.SaveBool( _name+ _stageNo,true);   
+                    }
+                    break;
+            }
+            
+            
+            //ï¿½zï¿½ï¿½Ïï¿½clipï¿½ÌƒCï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½ï¿½ï¿½Oï¿½ï¿½Audioï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
+            AudioManager.instance.PlayBgm(2);
+            AudioManager.instance.loop(false);
 
             gameClearObj.active = true;
 
@@ -276,10 +371,10 @@ public class PlayerController : MonoBehaviour
         countDownElapsedTime = 0;
 
 
-        //ƒeƒLƒXƒg‚ÌXVB
+        //ï¿½eï¿½Lï¿½Xï¿½gï¿½ÌXï¿½Vï¿½B
         countDownText.text = System.String.Format("{0}", Mathf.FloorToInt(countDownDuration));
 
-        //‘½•ªA•‰‰×“I‚É‚ÍGameObject‚Ö‚ÌQÆ‚Í•Ê‚É•Û‚µ‚Ä‚¢‚½•û‚ª‹X‚µ‚¢‚©‚Æv‚¤‚ªŠ„ˆ¤B
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½×“Iï¿½É‚ï¿½GameObjectï¿½Ö‚ÌQï¿½Æ‚Í•Ê‚É•Ûï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ævï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
         //countDownImage.gameObject.SetActive(true);
         countDownText.gameObject.SetActive(true);
 
@@ -288,20 +383,20 @@ public class PlayerController : MonoBehaviour
         {
             countDownElapsedTime += Time.deltaTime;
 
-            //‰~Œ`ƒXƒ‰ƒCƒ_[‚ÌXVBfillAmount‚Í0`1.0f‚ÌŠÔ‚Åw’è‚·‚éBŒo‰ßŠÔ‚Ì¬”“_ˆÈ‰º‚Ì’l‚ğ“ü‚ê‚Ä‚¢‚éB
+            //ï¿½~ï¿½`ï¿½Xï¿½ï¿½ï¿½Cï¿½_ï¿½[ï¿½ÌXï¿½Vï¿½BfillAmountï¿½ï¿½0ï¿½`1.0fï¿½ÌŠÔ‚Åwï¿½è‚·ï¿½ï¿½Bï¿½oï¿½ßï¿½ï¿½Ô‚Ìï¿½ï¿½ï¿½ï¿½_ï¿½È‰ï¿½ï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½B
             //countDownImage.fillAmount = countDownElapsedTime % 1.0f;
 
             if (countDown < Mathf.FloorToInt(countDownElapsedTime))
             {
-                //1•b‚İ‚ÅƒJƒEƒ“ƒgB
+                //1ï¿½bï¿½ï¿½ï¿½İ‚ÅƒJï¿½Eï¿½ï¿½ï¿½gï¿½B
                 countDown++;
-                //ƒeƒLƒXƒg‚ÌXVB
+                //ï¿½eï¿½Lï¿½Xï¿½gï¿½ÌXï¿½Vï¿½B
                 countDownText.text = System.String.Format("{0}", Mathf.FloorToInt(countDownDuration - countDown));
             }
 
             if (countDownDuration <= countDownElapsedTime)
             {
-                //ƒJƒEƒ“ƒgƒ_ƒEƒ“I—¹B
+                //ï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½_ï¿½Eï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½B
 
                 //countDownImage.gameObject.SetActive(false);
                 countDownText.gameObject.SetActive(false);
@@ -317,13 +412,13 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // ƒRƒ‹[ƒ`ƒ“–{‘Ì
+    // ï¿½Rï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½{ï¿½ï¿½
     private IEnumerator DelayDamageAnimation()
     {
-        //ƒ_ƒ[ƒW”»’è
+        
         this.m_Animator.SetBool("Damage", true);
         
-        // Œã‚ë‚É‰º‚ª‚é
+        // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã‚’å¾Œã‚ã«ç§»å‹•ã•ã›ã‚‹
         this.m_Rigidbody.velocity = new Vector3(0, 0, -1);
         
         yield return new WaitForSeconds(0.5f);

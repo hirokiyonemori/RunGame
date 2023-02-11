@@ -11,17 +11,17 @@ public class TutorialManager : MonoBehaviour
     public TextMeshProUGUI TutorialTitle;
     public TextMeshProUGUI TutorialText;
 
-    // ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒ^ƒXƒN
+    // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½^ï¿½Xï¿½N
     protected ITutorialTask currentTask;
     protected List<ITutorialTask> tutorialTask;
 
-    // ƒ`ƒ…[ƒgƒŠƒAƒ‹•\¦ƒtƒ‰ƒO
+    // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½O
     //private bool isEnabled;
 
-    // ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒ^ƒXƒN‚ÌğŒ‚ğ–‚½‚µ‚½Û‚Ì‘JˆÚ—pƒtƒ‰ƒO
+    // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½^ï¿½Xï¿½Nï¿½Ìï¿½ï¿½ï¿½ï¿½ğ–‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û‚Ì‘Jï¿½Ú—pï¿½tï¿½ï¿½ï¿½O
     private bool task_executed = false;
 
-    // ƒ`ƒ…[ƒgƒŠƒAƒ‹•\¦‚ÌUIˆÚ“®‹——£
+    // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½
     private float fade_pos_x = 460;
 
     private float fade_pos_y = 90;
@@ -34,15 +34,13 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
-
+        // è§£åƒåº¦ã§ç§»å‹•è·é›¢ã‚’å¤‰æ›´ã™ã‚‹
         fade_pos_x = 460 * Screen.width / 480;
         fade_pos_y = 90 * Screen.height/ 800;
-
-        transform.localPosition = new Vector3(fade_pos_x, fade_pos_y, 0);
-
-
+        
+        
         tutorialFlag = ES3.Load<bool>("Tutorial");
-        // ƒ`ƒ…[ƒgƒŠƒAƒ‹‚ªI‚í‚Á‚Ä‚¢‚éê‡
+        // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡
         if (tutorialFlag)
         {
             tutorialTextArea.GetComponent<CanvasGroup>().alpha = 0;
@@ -50,7 +48,7 @@ public class TutorialManager : MonoBehaviour
         }
 
 
-        // ƒ`ƒ…[ƒgƒŠƒAƒ‹‚Ìˆê——
+        // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ìˆê——
         tutorialTask = new List<ITutorialTask>()
         {
             new MovementTask(),
@@ -59,16 +57,16 @@ public class TutorialManager : MonoBehaviour
             
         };
 
-        // Å‰‚Ìƒ`ƒ…[ƒgƒŠƒAƒ‹‚ğİ’è
+        // ï¿½Åï¿½ï¿½Ìƒ`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½İ’ï¿½
         StartCoroutine(SetCurrentTask(tutorialTask.First()));
     }
 
     void Update()
     {
-        // ƒ`ƒ…[ƒgƒŠƒAƒ‹‚ª‘¶İ‚µÀs‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Éˆ—
+        // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ‚ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Éï¿½ï¿½ï¿½
         if (currentTask != null && !task_executed)
         {
-            // Œ»İ‚Ìƒ`ƒ…[ƒgƒŠƒAƒ‹‚ªÀs‚³‚ê‚½‚©”»’è
+            // ï¿½ï¿½ï¿½İ‚Ìƒ`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (currentTask.CheckTask())
             {
                 task_executed = true;
@@ -101,24 +99,24 @@ public class TutorialManager : MonoBehaviour
     }
 
     /// <summary>
-    /// V‚µ‚¢ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒ^ƒXƒN‚ğİ’è‚·‚é
+    /// ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½^ï¿½Xï¿½Nï¿½ï¿½İ’è‚·ï¿½ï¿½
     /// </summary>
     /// <param name="task"></param>
     /// <param name="time"></param>
     /// <returns></returns>
     protected IEnumerator SetCurrentTask(ITutorialTask task, float time = 0)
     {
-        // time‚ªw’è‚³‚ê‚Ä‚¢‚éê‡‚Í‘Ò‹@
+        // timeï¿½ï¿½ï¿½wï¿½è‚³ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Í‘Ò‹@
         yield return new WaitForSeconds(time);
 
         currentTask = task;
         task_executed = false;
 
-        // UI‚Éƒ^ƒCƒgƒ‹‚Æà–¾•¶‚ğİ’è
+        // UIï¿½Éƒ^ï¿½Cï¿½gï¿½ï¿½ï¿½Æï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ’ï¿½
         TutorialTitle.text = task.GetTitle();
         TutorialText.text = task.GetText();
 
-        // ƒ`ƒ…[ƒgƒŠƒAƒ‹ƒ^ƒXƒNİ’è—p‚ÌŠÖ”‚ğÀs
+        // ï¿½`ï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½^ï¿½Xï¿½Nï¿½İ’èï¿½pï¿½ÌŠÖï¿½ï¿½ï¿½ï¿½ï¿½ï¿½s
         task.OnTaskSetting();
 
         iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(
@@ -128,13 +126,13 @@ public class TutorialManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒ`ƒ…[ƒgƒŠƒAƒ‹‚Ì—LŒøE–³Œø‚ÌØ‚è‘Ö‚¦
+    /// ç‰¹ã«ä½¿ã£ã¦ã„ãªã„
     /// </summary>
     protected void SwitchEnabled()
     {
         //isEnabled = !isEnabled;
 
-        // UI‚Ì•\¦Ø‚è‘Ö‚¦
+        // UIï¿½Ì•\ï¿½ï¿½ï¿½Ø‚ï¿½Ö‚ï¿½
         //float alpha = isEnabled ? 1f : 0;
         //tutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
     }

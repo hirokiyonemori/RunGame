@@ -8,21 +8,31 @@ public class Main : MonoBehaviour
 
     public GoogleAds googleAds = null;
 
-    // Start is called before the first frame update
     void Start()
     {
        // googleAds.ShowInterstitialAd();
+       FadeManager.GetInstance().StartFadeIn();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
-    // çƒÉXÉ^Å[ÉgÇ∑ÇÈ
+    // ÂÜç„Çπ„Çø„Éº„Éà„Åô„Çã
     public void onRestertButton()
     {
-        SceneManager.LoadScene("Main");
+        //SceneManager.LoadScene("Main");
+        AudioManager.instance.loop(true);
+        FadeManager.GetInstance().StartFadeOut("Main");
     }
+
+    // 
+    public void onBackTitleButton()
+    {
+        //SceneManager.LoadScene("Title");
+        AudioManager.instance.loop(true);
+        FadeManager.GetInstance().StartFadeOut("Title");
+    }
+
 }

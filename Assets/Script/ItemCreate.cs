@@ -1,91 +1,47 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ItemCreate : MonoBehaviour
 {
-    //carPrefab‚ğ“ü‚ê‚é
+    //carPrefabã‚’å…¥ã‚Œã‚‹
     public GameObject carPrefab;
-    //coinPrefab‚ğ“ü‚ê‚é
+    //coinPrefabã‚’å…¥ã‚Œã‚‹
     public GameObject coinPrefab;
-    //cornPrefab‚ğ“ü‚ê‚é
+    //cornPrefabã‚’å…¥ã‚Œã‚‹
     public GameObject conePrefab;
-    //ƒXƒ^[ƒg’n“_
-    private int startPos = -160;
-    //ƒS[ƒ‹’n“_
-    private int goalPos = 120;
 
-    //ƒXƒe[ƒWƒ`ƒbƒv‚Ì”z—ñ
+    //ã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã®é…åˆ—
     public GameObject[] stageTips;
 
-    //intŒ^‚ğ•Ï”StageTipSize‚ÅéŒ¾‚µ‚Ü‚·B
+    //intå‹ã‚’å¤‰æ•°StageTipSizeã§å®£è¨€ã—ã¾ã™ã€‚
     const int STAGE_TIP_SIZE = 32;
 
-    //ƒAƒCƒeƒ€‚ğo‚·x•ûŒü‚Ì”ÍˆÍ
+    //ã‚¢ã‚¤ãƒ†ãƒ ã‚’å‡ºã™xæ–¹å‘ã®ç¯„å›²
     private float posRange = 3.4f;
-    //ì‚Á‚½ƒXƒe[ƒW‚ğíœ
+    //ä½œã£ãŸã‚¹ãƒ†ãƒ¼ã‚¸ã‚’å‰Šé™¤
     public List<GameObject> generatedStageList = new List<GameObject>();
 
-    //ƒ^[ƒQƒbƒgƒLƒƒƒ‰ƒNƒ^[‚Ìw’è‚ªo—ˆ‚é—l‚É‚·‚é‚æ
+    //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®æŒ‡å®šãŒå‡ºæ¥ã‚‹æ§˜ã«ã™ã‚‹ã‚ˆ
     public Transform character;
 
-    //©“®¶¬‚·‚é‚Ég‚¤•Ï”startTipIndex
+    //è‡ªå‹•ç”Ÿæˆã™ã‚‹æ™‚ã«ä½¿ã†å¤‰æ•°startTipIndex
     public int startTipIndex;
-    //ƒXƒe[ƒW¶¬‚Ìæ“Ç‚İŒÂ”
+    //ã‚¹ãƒ†ãƒ¼ã‚¸ç”Ÿæˆã®å…ˆèª­ã¿å€‹æ•°
     public int preInstantiate;
 
     const int CAR = 0;
     const int COIN = 1;
     const int CONE = 2;
 
-    //intŒ^‚ğ•Ï”currentTipIndex‚ÅéŒ¾‚µ‚Ü‚·B
+    //intå‹ã‚’å¤‰æ•°currentTipIndexã§å®£è¨€ã—ã¾ã™ã€‚
     int currentTipIndex;
 
-
-
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
-        /*//ˆê’è‚Ì‹——£‚²‚Æ‚ÉƒAƒCƒeƒ€‚ğ¶¬
-        for (int i = startPos; i < goalPos; i += 15)
-        {
-            //‚Ç‚ÌƒAƒCƒeƒ€‚ğo‚·‚Ì‚©‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
-            int num = Random.Range(0, 10);
-            if (num <= 1)
-            {
-                //ƒR[ƒ“‚ğx²•ûŒü‚Éˆê’¼ü‚É¶¬
-                for (float j = -1; j <= 1; j += 0.4f)
-                {
-                    GameObject cone = Instantiate(conePrefab) as GameObject;
-                    cone.transform.position = new Vector3(4 * j, cone.transform.position.y, i);
-                }
-            }
-            else
-            {
-
-                //ƒŒ[ƒ“‚²‚Æ‚ÉƒAƒCƒeƒ€‚ğ¶¬
-                for (int j = -1; j < 2; j++)
-                {
-                    //ƒAƒCƒeƒ€‚Ìí—Ş‚ğŒˆ‚ß‚é
-                    int item = Random.Range(1, 11);
-                    //ƒAƒCƒeƒ€‚ğ’u‚­ZÀ•W‚ÌƒIƒtƒZƒbƒg‚ğƒ‰ƒ“ƒ_ƒ€‚Éİ’è
-                    int offsetZ = Random.Range(-5, 6);
-                    //60%ƒRƒCƒ“”z’u:30%Ô”z’u:10%‰½‚à‚È‚µ
-                    if (1 <= item && item <= 6)
-                    {
-                        //ƒRƒCƒ“‚ğ¶¬
-                        GameObject coin = Instantiate(coinPrefab) as GameObject;
-                        coin.transform.position = new Vector3(posRange * j, coin.transform.position.y, i + offsetZ);
-                    }
-                    else if (7 <= item && item <= 9)
-                    {
-                        //Ô‚ğ¶¬
-                        GameObject car = Instantiate(carPrefab) as GameObject;
-                        car.transform.position = new Vector3(posRange * j, car.transform.position.y, i + offsetZ);
-                    }
-                }
-            }
-        }*/
+        Debug.Log(" preInstantiate " + preInstantiate );
     }
 
     // Update is called once per frame
@@ -93,9 +49,9 @@ public class ItemCreate : MonoBehaviour
     {
 
 
-        //ƒLƒƒƒ‰ƒNƒ^[‚ÌˆÊ’u‚©‚çŒ»İ‚ÌƒXƒe[ƒWƒ`ƒbƒv‚ÌƒCƒ“ƒfƒbƒNƒX‚ğŒvZ‚µ‚Ü‚·
+        //ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ä½ç½®ã‹ã‚‰ç¾åœ¨ã®ã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¨ˆç®—ã—ã¾ã™
         int charaPositionIndex = (int)(character.position.z / STAGE_TIP_SIZE);
-        //Ÿ‚ÌƒXƒe[ƒWƒ`ƒbƒv‚É“ü‚Á‚½‚çƒXƒe[ƒW‚ÌXVˆ—‚ğs‚¢‚Ü‚·B
+        //æ¬¡ã®ã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã«å…¥ã£ãŸã‚‰ã‚¹ãƒ†ãƒ¼ã‚¸ã®æ›´æ–°å‡¦ç†ã‚’è¡Œã„ã¾ã™ã€‚
         if (charaPositionIndex + preInstantiate > currentTipIndex)
         {
             UpdateStage(charaPositionIndex + preInstantiate);
@@ -107,16 +63,17 @@ public class ItemCreate : MonoBehaviour
 
     GameObject GenerateStage(int tipIndex)
     {
+        // 
         int nextStageTip = Random.Range(0, stageTips.Length);
         int posX = Random.Range(-2, 2);
         int rot = 0;
-        // Ô‚Ìê‡‚Í‰ñ“]ˆ—‚ğ‰Á‚¦‚é
+        // è»Šã®å ´åˆã¯å›è»¢å‡¦ç†ã‚’åŠ ãˆã‚‹
         if(nextStageTip == 0)
 		{
             rot = -90;
 		}
         float pos_y = 1;
-        
+        //æ¬¡è¡¨ç¤ºã™ã‚‹ãƒãƒƒãƒ—
 		switch (nextStageTip)
 		{
             case CAR:
@@ -137,26 +94,133 @@ public class ItemCreate : MonoBehaviour
         return stageObject;
     }
 
-    //w’è‚ÌƒCƒ“ƒfƒbƒNƒX‚Ü‚Å‚ÌƒXƒe[ƒWƒ`ƒbƒv‚ğ¶¬‚µ‚ÄAŠÇ—‰º‚É‚¨‚­
+    //æŒ‡å®šã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã¾ã§ã®ã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã‚’ç”Ÿæˆã—ã¦ã€ç®¡ç†ä¸‹ã«ãŠã
     void UpdateStage(int toTipIndex)
     {
         if (toTipIndex <= currentTipIndex) return;
 
-        //w’è‚ÌƒXƒe[ƒWƒ`ƒbƒv‚Ü‚Å¶¬‚·‚é‚æ
+        //æŒ‡å®šã®ã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã¾ã§ç”Ÿæˆã™ã‚‹ã‚ˆ
         for (int i = currentTipIndex + 1; i <= toTipIndex; i++)
         {
-            GameObject stageObject = GenerateStage(i);
-            //¶¬‚µ‚½ƒXƒe[ƒWƒ`ƒbƒv‚ğŠÇ—ƒŠƒXƒg‚É’Ç‰Á‚µ‚ÄA
-            generatedStageList.Add(stageObject);
+            
+            //ã©ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚’å‡ºã™ã®ã‹ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã«è¨­å®š
+            int num = Random.Range(0, 10);
+            int nextStageTip = 0;
+            
+            if (num <= 2)
+            {
+                nextStageTip = CAR;
+            }else if (num <= 7)
+            {
+                nextStageTip = COIN;
+            }else if (num <= 10)
+            {
+                nextStageTip = CONE;
+            }
+
+            //int nextStageTip = Random.Range(0, stageTips.Length);
+            int tipIndex = i;
+            int rot = 0;
+            // è»Šã®å ´åˆã¯å›è»¢å‡¦ç†ã‚’åŠ ãˆã‚‹
+            if (nextStageTip == 0)
+            {
+                rot = -90;
+            }
+            float pos_y = 1;
+            //æ¬¡è¡¨ç¤ºã™ã‚‹ãƒãƒƒãƒ—
+            switch (nextStageTip)
+            {
+                case CAR:
+                    pos_y = 0.2f;
+                    break;
+                case COIN:
+                    pos_y = 1;
+                    break;
+                case CONE:
+                    pos_y = 0;
+                    break;
+
+            }
+            
+
+            //ä¸€å®šã®è·é›¢ã”ã¨ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ
+            
+            int posX = Random.Range(-2, 1);
+            int count = 0;
+            if (nextStageTip == CONE)
+            {
+                posX = -4;
+                count = 10;
+                //ã‚³ãƒ¼ãƒ³ã‚’xè»¸æ–¹å‘ã«ä¸€ç›´ç·šã«ç”Ÿæˆ
+                // åˆç´šã®å ´åˆã¯çœŸã‚“ä¸­ã«é…ç½®
+                if (PlayerManager.instance.stageNo == 0)
+                {
+                    count = 1;
+                    posX = 0;
+                }
+                for (int j = 0; j < count; j ++)
+                {
+                    
+                    GameObject stageObject = (GameObject)Instantiate(
+                            stageTips[nextStageTip],
+                            new Vector3(posX + j, pos_y, tipIndex * STAGE_TIP_SIZE),
+                            Quaternion.Euler(rot, 0, 0));
+                    //ç”Ÿæˆã—ãŸã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã‚’ç®¡ç†ãƒªã‚¹ãƒˆã«è¿½åŠ ã—ã¦ã€
+                    generatedStageList.Add(stageObject);
+                }
+            }
+            else
+            {
+                count = 2 + 2 * PlayerManager.instance.stageNo;
+                //ãƒ¬ãƒ¼ãƒ³ã”ã¨ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ
+                
+                if (nextStageTip == COIN)
+                {
+                    for (int j = 0; j < count; j++)
+                    {
+                        //è»Šã‚’ç”Ÿæˆ
+                        GameObject stageObject = (GameObject)Instantiate(
+                            stageTips[nextStageTip],
+                            new Vector3(posX , pos_y, tipIndex * STAGE_TIP_SIZE + j * 10 ),
+                            Quaternion.Euler(rot, 0, 0));
+
+                        //ç”Ÿæˆã—ãŸã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã‚’ç®¡ç†ãƒªã‚¹ãƒˆã«è¿½åŠ ã—ã¦ã€
+                        generatedStageList.Add(stageObject);
+                    }
+                }else if (nextStageTip == CAR)
+                {
+                    int carCount = PlayerManager.instance.stageNo + 1;
+                    if (carCount >= 3) carCount = 3;
+                
+                    //ãƒ¬ãƒ¼ãƒ³ã”ã¨ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ
+                    for (int j = 0; j < carCount; j++)
+                    {
+                    
+                    
+                        //ã‚³ã‚¤ãƒ³ã‚’ç”Ÿæˆ
+                        GameObject stageObject = (GameObject)Instantiate(
+                            stageTips[nextStageTip],
+                            new Vector3(posX + (j * 4  ) , pos_y, tipIndex * STAGE_TIP_SIZE),
+                            Quaternion.Euler(rot, 0, 0));
+                        //ç”Ÿæˆã—ãŸã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã‚’ç®¡ç†ãƒªã‚¹ãƒˆã«è¿½åŠ ã—ã¦ã€
+                        generatedStageList.Add(stageObject);
+                    }   
+                }
+            }
+            //GameObject stageObject = GenerateStage(i);
+            //ç”Ÿæˆã—ãŸã‚¹ãƒ†ãƒ¼ã‚¸ãƒãƒƒãƒ—ã‚’ç®¡ç†ãƒªã‚¹ãƒˆã«è¿½åŠ ã—ã¦ã€
+            //generatedStageList.Add(stageObject);
         }
-        //ƒXƒe[ƒW•ÛãŒÀ‚É‚È‚é‚Ü‚ÅŒÃ‚¢ƒXƒe[ƒW‚ğíœ‚µ‚Ü‚·B
-        while (generatedStageList.Count > preInstantiate + 2) DestroyOldestStage();
+        //ã‚¹ãƒ†ãƒ¼ã‚¸ä¿æŒä¸Šé™ã«ãªã‚‹ã¾ã§å¤ã„ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’å‰Šé™¤ã—ã¾ã™ã€‚
+        
+        while (generatedStageList.Count > preInstantiate + 4 + 50 * PlayerManager.instance.stageNo ) DestroyOldestStage();
+        //while (generatedStageList.Count > preInstantiate + 4 + 4 * PlayerManager.instance.stageNo) DestroyOldestStage();
 
         currentTipIndex = toTipIndex;
 
     }
 
-    //ˆê”ÔŒÃ‚¢ƒXƒe[ƒW‚ğíœ‚µ‚Ü‚·
+    //ä¸€ç•ªå¤ã„ã‚¹ãƒ†ãƒ¼ã‚¸ã‚’å‰Šé™¤ã—ã¾ã™
     void DestroyOldestStage()
     {
         GameObject oldStage = generatedStageList[0];
