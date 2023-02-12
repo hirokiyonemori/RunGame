@@ -3,32 +3,54 @@ using GoogleMobileAds.Api;
 using System;
 public class GoogleAds : MonoBehaviour
 {
-    public string adUnitId;
+    private string adUnitId;
     private InterstitialAd interstitialAd;
+
+    private int reShowCount = 0;
     // Use this for initialization
     void Start()
     {
-        //ƒAƒvƒŠ‹N“®‚Éˆê“x•K‚¸Àsi‘¼‚ÌƒXƒNƒŠƒvƒg‚ÅÀs‚µ‚Ä‚¢‚½‚ç•s—vj
+        //ï¿½Aï¿½vï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Éˆï¿½xï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½sï¿½iï¿½ï¿½ï¿½ÌƒXï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½Åï¿½ï¿½sï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½vï¿½j
         MobileAds.Initialize(initStatus => { });
-        //L‚ğ•\¦
+        //ï¿½Lï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½
         RequestInterstitial();
     }
-    //L‚ğ•\¦‚·‚éƒƒ\ƒbƒh
+    //ï¿½Lï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½h
     public void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        //adUnitId = "Lƒ†ƒjƒbƒgID‚ğƒRƒsƒyiAndroidj";  //–{”Ô
-        //adUnitId = "ca-app-pub-3940256099942544/1033173712";  //ƒeƒXƒg
+        // privateã§ã‚„ã‚‰ãªã„ã¨è¡¨ç¤ºã¯ã•ã‚Œãªã„
+        adUnitId = "ca-app-pub-8148356110096114/4508284743";  //ï¿½eï¿½Xï¿½g
 #elif UNITY_IOS
-        //adUnitId = "Lƒ†ƒjƒbƒgID‚ğƒRƒsƒyiiOSj";  //–{”Ô
-        //adUnitId = "ca-app-pub-3940256099942544/4411468910";  //ƒeƒXƒg
+        //adUnitId = "ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½jï¿½bï¿½gIDï¿½ï¿½ï¿½Rï¿½sï¿½yï¿½iiOSï¿½j";  //ï¿½{ï¿½ï¿½
+        //adUnitId = "ca-app-pub-3940256099942544/4411468910";  //ï¿½eï¿½Xï¿½g
 #endif
         this.interstitialAd = new InterstitialAd(adUnitId);
         AdRequest request = new AdRequest.Builder().Build();
         interstitialAd.LoadAd(request);
+    }
+    
+    
+    //ã‚¤ãƒ³ã‚¿ãƒ¼ã‚¹ãƒ†ã‚£ã‚·ãƒ£ãƒ«åºƒå‘Šã‚’è¡¨ç¤ºã—ãŸã„ã¨ãã«å‘¼ã³å‡ºã™
+    public void InterstitialShow()
+    {
+        //Debug.Log(" this.interstitialAd.IsLoaded() " + this.interstitialAd.IsLoaded());
         if (this.interstitialAd.IsLoaded())
         {
             this.interstitialAd.Show();
+            reShowCount = 0;
         }
+        else {
+            //æº–å‚™ã§ãã¦ãªã‹ã£ãŸã‚‰0.1ç§’ã”ã¨ã«æº–å‚™ã§ãã¦ã‚‹ã‹ç¢ºèª
+            if (reShowCount < 10) {
+                Invoke ("InterstitialShow", 0.1f);
+                reShowCount++;
+            } else {
+                //1ç§’ãŸã£ã¦ã‚‚æº–å‚™ã§ããªã‹ã£ãŸã¨ã
+                reShowCount = 0;
+            }
+        }   
     }
+    
+    
 }

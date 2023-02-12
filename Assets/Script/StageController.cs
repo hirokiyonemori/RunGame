@@ -91,7 +91,8 @@ public class StageController : MonoBehaviour
             
             generatedStageList.Add(stageObject);
         }
-        while (generatedStageList.Count > preInstantiate + 2) DestroyOldestStage();
+        Debug.Log(" generatedStageList " + generatedStageList.Count );
+        while (generatedStageList.Count > preInstantiate + 2 ) DestroyOldestStage();
 
         currentTipIndex = toTipIndex;
     }
@@ -100,11 +101,9 @@ public class StageController : MonoBehaviour
     GameObject GenerateStage(int tipIndex)
     {
         int nextStageTip = Random.Range(0, stageTips.Length);
-        Debug.Log(" goalDisCom " + goalDisCom );
         //Debug.Log(" tipIndex " + tipIndex );
         if (tipIndex >= runDistance)
         {
-            Debug.Log(" tipIndex " + tipIndex );
             GameObject obj = (GameObject)Instantiate(
                 goalPrefab,
                 new Vector3(0, 0, tipIndex * STAGE_TIP_SIZE),

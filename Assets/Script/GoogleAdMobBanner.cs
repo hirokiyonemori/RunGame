@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/* ’Ç‰Á */
+/* è¿½åŠ  */
 using GoogleMobileAds.Api;
 
 public class GoogleAdMobBanner : MonoBehaviour
