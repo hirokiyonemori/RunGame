@@ -12,6 +12,7 @@ public class SaveManager : MonoBehaviour
     public const string SOUND_VALUE = "SoundValue";
     public const string BGM_VALUE = "BGMValue";
     public const string LANGUAGE = "Language";
+    public const string LIFE = "Life";
     
     int myValue;
     public static SaveManager instance;
@@ -72,21 +73,32 @@ public class SaveManager : MonoBehaviour
 		}
 		else
 		{
-            Debug.Log("Tutorial  2");
             ES3.Save<bool>("Tutorial", false);
         }
         if (ES3.KeyExists(SOUND_VALUE))
         {
-            Debug.Log("SOUND_VALUE");
+            
             Debug.Log(SOUND_VALUE + ES3.Load(SOUND_VALUE));
             float value = (float)ES3.Load(SOUND_VALUE);
             //AudioManager.instance.Setup(value);
         }
         else
         {
-            Debug.Log("SOUND_VALUE");
+            
             ES3.Save(SOUND_VALUE,1f);
         }
+        if (ES3.KeyExists(LIFE))
+        {
+            //Debug.Log(LIFE + ES3.Load(LIFE));
+            ///int value = ES3.Load(LIFE);
+            //AudioManager.instance.Setup(value); ;
+        }
+        else
+        {
+            ES3.Save(LIFE,3);
+            Debug.Log(LIFE + ES3.Load(LIFE));
+        }
+        
         if (ES3.KeyExists(BGM_VALUE))
         {
             Debug.Log(BGM_VALUE + ES3.Load(BGM_VALUE));
@@ -95,7 +107,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            //Debug.Log(BGM_VALUE + ES3.Load(BGM_VALUE));
+            
             ES3.Save(BGM_VALUE,1f);
             AudioManager.instance.Setup(1f); ;
         }

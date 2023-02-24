@@ -61,39 +61,10 @@ public class ItemCreate : MonoBehaviour
 
     
 
-    GameObject GenerateStage(int tipIndex)
-    {
-        // 
-        int nextStageTip = Random.Range(0, stageTips.Length);
-        int posX = Random.Range(-2, 2);
-        int rot = 0;
-        // 車の場合は回転処理を加える
-        if(nextStageTip == 0)
-		{
-            rot = -90;
-		}
-        float pos_y = 1;
-        //次表示するチップ
-		switch (nextStageTip)
-		{
-            case CAR:
-                pos_y = 0.2f;
-                break;
-            case COIN:
-                pos_y = 1;
-                break;
-            case CONE:
-                pos_y = 0;
-                break;
-
-        }
-        GameObject stageObject = (GameObject)Instantiate(
-            stageTips[nextStageTip],
-            new Vector3(posX, pos_y, tipIndex * STAGE_TIP_SIZE),
-            Quaternion.Euler(rot, 0, 0));
-        return stageObject;
-    }
-
+    private int[] carTable = {2,3,4,5 };
+    private int[] coinTable = {7,6,7,7 };
+    private int[] coneTable = {10,10,10,10 };
+    
     //指定のインデックスまでのステージチップを生成して、管理下におく
     void UpdateStage(int toTipIndex)
     {
@@ -106,14 +77,14 @@ public class ItemCreate : MonoBehaviour
             //どのアイテムを出すのかをランダムに設定
             int num = Random.Range(0, 10);
             int nextStageTip = 0;
-            
-            if (num <= 2)
+            int tableNo = PlayerManager.instance.stageNo;
+            if (num <= carTable[tableNo])
             {
                 nextStageTip = CAR;
-            }else if (num <= 7)
+            }else if (num <= coinTable[tableNo])
             {
                 nextStageTip = COIN;
-            }else if (num <= 10)
+            }else if (num <= coneTable[tableNo])
             {
                 nextStageTip = CONE;
             }
@@ -121,10 +92,17 @@ public class ItemCreate : MonoBehaviour
             //int nextStageTip = Random.Range(0, stageTips.Length);
             int tipIndex = i;
             int rot = 0;
+            int rotY = 0;
             // 車の場合は回転処理を加える
-            if (nextStageTip == 0)
+            if (nextStageTip == CAR)
             {
-                rot = -90;
+                if (PlayerManager.instance.stageNo >= 3)
+                {
+                    rotY = 180;
+                }
+                
+                rot = -90;   
+                
             }
             float pos_y = 1;
             //次表示するチップ
@@ -201,7 +179,7 @@ public class ItemCreate : MonoBehaviour
                         GameObject stageObject = (GameObject)Instantiate(
                             stageTips[nextStageTip],
                             new Vector3(posX + (j * 4  ) , pos_y, tipIndex * STAGE_TIP_SIZE),
-                            Quaternion.Euler(rot, 0, 0));
+                            Quaternion.Euler(rot, rotY, 0));
                         //生成したステージチップを管理リストに追加して、
                         generatedStageList.Add(stageObject);
                     }   

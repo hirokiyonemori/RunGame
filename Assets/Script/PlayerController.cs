@@ -96,6 +96,18 @@ public class PlayerController : MonoBehaviour
         m_score = 0;
         
         
+        foreach (var obj in (lifeObj))
+        {
+            obj.SetActive((false));
+        }
+
+        life = (int)ES3.Load(SaveManager.LIFE);
+        for (int i = 0; i < life; i ++ )
+        {
+            lifeObj[i].SetActive(true);
+        }
+        
+        
         //�z��ϐ�clip�̃C���f�b�N�X���O��Audio�̃t�@�C�����Đ����܂��B
 
         AudioManager.instance.PlayBgm(1);
@@ -129,7 +141,7 @@ public class PlayerController : MonoBehaviour
             case StageNo.senior:
                 speed = 20;
                 break;
-            //　上級
+            //　達人
             default:
                 speed = 30;
                 break;
@@ -216,7 +228,7 @@ public class PlayerController : MonoBehaviour
         //�A�ő΍�
         if ( ( Input.GetKeyDown(KeyCode.Space) 
                || Input.GetMouseButtonUp(0) ) 
-             && this.transform.position.y < 0.5f )
+             && this.transform.position.y < 0.5f && !this.isGround  )
         {
             //�W�����v�A�j�����Đ�
             this.m_Animator.SetBool("Jump", true);
@@ -226,8 +238,14 @@ public class PlayerController : MonoBehaviour
             this.m_Rigidbody.AddForce(new Vector3(0,upForce,0 ));
             
             AudioManager.instance.PlaySe(0);
-            Debug.Log(" transform.position.y  " + transform.position.y );
+            //Debug.Log(" transform.position.y  " + transform.position.y );
         }
+
+        if (this.transform.position.y >=0.5f)
+        {
+            m_IsJump = true;
+        }
+        
         
         if (!tutorialFlag) return;
         // �ړ������͎��s���Ȃ�
@@ -252,7 +270,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //��Q���ɏՓ˂����ꍇ�i�ǉ��j
-        if (  collision.gameObject.tag == "Ground")
+        if ( collision.gameObject.tag == "Ground")
         {
             
             if (m_IsJump)
@@ -349,8 +367,24 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
             }
-            
-            
+            // ライフが現在のライフの更新
+            int l =(int)ES3.Load(SaveManager.LIFE);
+            //50 の場合はライフを５つに増やし
+            // 20の場合は４つに増やす
+            if (m_score >= 50)
+            {
+                if (l <= 4)
+                {
+                    ES3.Save(SaveManager.LIFE,5);    
+                }
+            }else if (m_score >= 20)
+            {
+                if (l <= 3)
+                {
+                    ES3.Save(SaveManager.LIFE, 4);
+                }
+            }
+
             //�z��ϐ�clip�̃C���f�b�N�X���O��Audio�̃t�@�C�����Đ����܂��B
             AudioManager.instance.PlayBgm(2);
             AudioManager.instance.loop(false);

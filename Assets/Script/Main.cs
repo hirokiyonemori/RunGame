@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-
+    
     public GoogleAds googleAds = null;
 
     void Start()
@@ -24,6 +24,7 @@ public class Main : MonoBehaviour
     {
         //SceneManager.LoadScene("Main");
         AudioManager.instance.loop(true);
+        googleAds.InterstitialShow();
         FadeManager.GetInstance().StartFadeOut("Main");
     }
 
