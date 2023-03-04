@@ -1,3 +1,75 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0e712997d03a61566d138012ffa79b94f781f989c1e1d336518b1f1e990b0e1b
-size 1787
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringTable_zh-Hans
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: zh-Hans
+  m_SharedData: {fileID: 11400000, guid: 847ecec8416f5f04f9222ad07fc5dafb, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 440011220840448
+    m_Localized: Intermediat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24633405440
+    m_Localized: Dasar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442069512613888
+    m_Localized: Canggih
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442200530087936
+    m_Localized: Menguasai
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981003325501440
+    m_Localized: Jepang
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981083411542016
+    m_Localized: Bahasa inggris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981159684960256
+    m_Localized: bahasa Indonesia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2011879094611968
+    m_Localized: keputusan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2012092685348864
+    m_Localized: membatalkan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3930901402873856
+    m_Localized: kembali ke judul
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3931272808493056
+    m_Localized: Melanjutkan permainan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3932014797647872
+    m_Localized: Jarak ke perusahaan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5383676917706752
+    m_Localized: peringkat
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

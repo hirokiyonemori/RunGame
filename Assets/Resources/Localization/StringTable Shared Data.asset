@@ -1,3 +1,80 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:30f91d1cabb701f7a903823cb13355688be6b95d162bb15478e5f98ef3693342
-size 1878
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: StringTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: StringTable
+  m_TableCollectionNameGuidString: 847ecec8416f5f04f9222ad07fc5dafb
+  m_Entries:
+  - m_Id: 24633405440
+    m_Key: elementary
+    m_Metadata:
+      m_Items: []
+  - m_Id: 440011220840448
+    m_Key: intermediate level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442069512613888
+    m_Key: senior
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442200530087936
+    m_Key: expert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981003325501440
+    m_Key: Japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981083411542016
+    m_Key: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981159684960256
+    m_Key: Chinese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2011879094611968
+    m_Key: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2012092685348864
+    m_Key: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3930901402873856
+    m_Key: TitleBack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3931272808493056
+    m_Key: GameResume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3932014797647872
+    m_Key: ComDis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5383676917706752
+    m_Key: Ranking
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 1986783047477362716
+  references:
+    version: 2
+    RefIds:
+    - rid: 1986783047477362716
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1675194723826

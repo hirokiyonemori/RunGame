@@ -1,3 +1,75 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:58b722f4ea7e56a42ab90ec15563679e42ece53c5cc52278e8beee7b4829bd17
-size 1753
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 847ecec8416f5f04f9222ad07fc5dafb, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 24633405440
+    m_Localized: elementary level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 440011220840448
+    m_Localized: intermediate level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442069512613888
+    m_Localized: senior
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442200530087936
+    m_Localized: expert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981003325501440
+    m_Localized: Japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981083411542016
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1981159684960256
+    m_Localized: Indonesian
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2011879094611968
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2012092685348864
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3930901402873856
+    m_Localized: back to title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3931272808493056
+    m_Localized: Resume game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3932014797647872
+    m_Localized: Distance to company
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5383676917706752
+    m_Localized: Ranking
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
