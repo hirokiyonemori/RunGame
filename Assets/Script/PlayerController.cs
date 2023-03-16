@@ -146,9 +146,17 @@ public class PlayerController : MonoBehaviour
                 speed = 30;
                 break;
         }
-        
+
+        PlayerManager.instance.lastFlag = false;
+
+
     }
     private float speed = 0;
+
+    private float lastSpeed = 10;
+
+    
+
     void Update()
     {
 
@@ -251,7 +259,15 @@ public class PlayerController : MonoBehaviour
         // �ړ������͎��s���Ȃ�
         if (!m_IsJump  && !this.m_Animator.GetBool("Damage"))
         {
-            this.m_Rigidbody.velocity = new Vector3(0, 0, speed);
+			if (PlayerManager.instance.lastFlag)
+			{
+                this.m_Rigidbody.velocity = new Vector3(0, 0, lastSpeed);
+            }
+			else
+			{
+                this.m_Rigidbody.velocity = new Vector3(0, 0, speed);
+            }
+            
         }
         
 
@@ -264,6 +280,8 @@ public class PlayerController : MonoBehaviour
         if ( collision.gameObject.tag == "Ground")
         {
             this.isGround = false;
+            Debug.Log("Ground");
+            
         }
     }
 
@@ -275,10 +293,14 @@ public class PlayerController : MonoBehaviour
             
             if (m_IsJump)
             {
-                Debug.Log("Jump");
+                Debug.Log("m_IsJump");
                 this.m_Animator.SetBool("Jump", false);
-            
-                m_IsJump = false;    
+
+                if (this.transform.position.y <= 0.1f)
+                {
+                    m_IsJump = false;
+                    Debug.Log("m_IsJump2");
+                }
             }
             this.isGround = true;
         }

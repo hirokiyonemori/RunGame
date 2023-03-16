@@ -14,6 +14,9 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager instance;
     public int stageNo = 0;
+
+    public bool lastFlag = false;
+
     private void Awake()
     {
         if (instance == null)

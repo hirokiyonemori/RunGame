@@ -91,7 +91,7 @@ public class StageController : MonoBehaviour
             
             generatedStageList.Add(stageObject);
         }
-        Debug.Log(" generatedStageList " + generatedStageList.Count );
+        //Debug.Log(" generatedStageList " + generatedStageList.Count );
         while (generatedStageList.Count > preInstantiate + 2 ) DestroyOldestStage();
 
         currentTipIndex = toTipIndex;
@@ -110,6 +110,7 @@ public class StageController : MonoBehaviour
                 Quaternion.Euler(0, 90, 0));
         
             goalFlag = true;
+            PlayerManager.instance.lastFlag = true;
             return obj;
         }
         GameObject stageObject = (GameObject)Instantiate(
