@@ -17,7 +17,7 @@ public class Car : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerManager.instance.stageNo >= 3)
-            this.m_Rigidbody.velocity = new Vector3(0, 0, -10);
+        //if(PlayerManager.instance.stageNo >= 3)
+        //    this.m_Rigidbody.velocity = new Vector3(0, 0, -10);
     }
 }

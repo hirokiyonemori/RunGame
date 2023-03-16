@@ -154,6 +154,19 @@ public class ItemCreate : MonoBehaviour
                 
                 if (nextStageTip == COIN)
                 {
+					switch (PlayerManager.instance.stageNo)
+					{
+                        case 0:
+                        case 1:
+                            count = 2 + 2 * PlayerManager.instance.stageNo;
+                            break;
+                        case 2:
+                            count = 2 + 2 * 1;
+                            break;
+                        case 3:
+                            count = 2 ;
+                            break;
+                    }
                     for (int j = 0; j < count; j++)
                     {
                         //車を生成
