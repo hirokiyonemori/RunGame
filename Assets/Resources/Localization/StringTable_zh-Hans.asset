@@ -70,6 +70,30 @@ MonoBehaviour:
     m_Localized: peringkat
     m_Metadata:
       m_Items: []
+  - m_Id: 19484852873326592
+    m_Localized: Operasi dasar Memindahkan (1/2)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485676181647360
+    m_Localized: Usap untuk menggerakkan karakter.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485947024633856
+    m_Localized: Operasi dasar Lompat (2/2)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485955237081088
+    m_Localized: Sentuh dan lepaskan layar untuk melompat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19490939630514176
+    m_Localized: Tutorial selesai!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19490963680653312
+    m_Localized: Bergegaslah dan pergilah bekerja!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

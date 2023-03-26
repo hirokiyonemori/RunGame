@@ -1,17 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class EndTask : ITutorialTask
 {
+    string targetTableName = "StringTable";
+
+
     public string GetTitle()
     {
-        return "チュートリアル完了！！";
+        // Get
+        var table = LocalizationSettings.StringDatabase.GetTable(targetTableName);
+
+        var value = table.GetEntry("TutorialTitleEnd").Value;
+        Debug.Log(" value " + value);
+        
+
+        var value2 = table.GetEntry("TutorialContentsEnd").Value;
+        Debug.Log(" value2 " + value2);
+
+        return value + "\n"+ value2;
     }
 
     public string GetText()
     {
-        return "急いで会社に向かおう！！";
+        return "";
     }
 
     public void OnTaskSetting()

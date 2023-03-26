@@ -70,6 +70,30 @@ MonoBehaviour:
     m_Localized: Ranking
     m_Metadata:
       m_Items: []
+  - m_Id: 19484852873326592
+    m_Localized: Basic operation Move (1/2)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485676181647360
+    m_Localized: Swipe to move the character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485955237081088
+    m_Localized: Touch and release the screen to jump.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485947024633856
+    m_Localized: Basic Operation Jump (2/2)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19490939630514176
+    m_Localized: Tutorial complete!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19490963680653312
+    m_Localized: Let's hurry up and head to the office!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,17 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class JumpTask : ITutorialTask
 {
+    string targetTableName = "StringTable";
+
     public string GetTitle()
     {
-        return "基本操作 ジャンプ (2/2)";
+
+        // Get
+        var table = LocalizationSettings.StringDatabase.GetTable(targetTableName);
+
+        var value = table.GetEntry("TutorialTitle2").Value;
+
+
+        var value2 = table.GetEntry("TutorialContents2").Value;
+        Debug.Log(" value " + value);
+
+        Debug.Log(" value " + value2);
+        return value +"\n" +  value2;
     }
 
     public string GetText()
     {
-        return "画面をタッチし離すとジャンプすることができる";
+        
+
+        // Get
+        var table = LocalizationSettings.StringDatabase.GetTable(targetTableName);
+
+        var value = table.GetEntry("TutorialContents2").Value;
+        Debug.Log(" value " + value);
+        return "";
     }
 
     public void OnTaskSetting()

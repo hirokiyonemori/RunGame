@@ -67,6 +67,30 @@ MonoBehaviour:
     m_Key: Ranking
     m_Metadata:
       m_Items: []
+  - m_Id: 19484852873326592
+    m_Key: TutorialTitle1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485676181647360
+    m_Key: TutorialContents1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485947024633856
+    m_Key: TutorialTitle2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19485955237081088
+    m_Key: TutorialContents2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19490939630514176
+    m_Key: TutorialTitleEnd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19490963680653312
+    m_Key: TutorialContentsEnd
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
