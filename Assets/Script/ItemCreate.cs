@@ -6,12 +6,6 @@ using Random = UnityEngine.Random;
 
 public class ItemCreate : MonoBehaviour
 {
-    //carPrefabを入れる
-    public GameObject carPrefab;
-    //coinPrefabを入れる
-    public GameObject coinPrefab;
-    //cornPrefabを入れる
-    public GameObject conePrefab;
 
     //ステージチップの配列
     public GameObject[] stageTips;
