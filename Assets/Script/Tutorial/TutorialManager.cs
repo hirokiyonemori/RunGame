@@ -114,7 +114,10 @@ public class TutorialManager : MonoBehaviour
 
         // UI�Ƀ^�C�g���Ɛ�������ݒ�
         TutorialTitle.text = task.GetTitle();
+        Debug.Log(" task.GetTitle()" + task.GetTitle());
         TutorialText.text = task.GetText();
+
+        Debug.Log(" task.GetText()" + task.GetText());
 
         // �`���[�g���A���^�X�N�ݒ莞�p�̊֐������s
         task.OnTaskSetting();

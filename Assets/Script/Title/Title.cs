@@ -27,6 +27,17 @@ public class Title : MonoBehaviour
 	
 	public GoogleAds googleAds;
 
+	//public GoogleAdMobBanner googleAdMobBanner;
+
+
+	/// <summary>
+	/// 報酬ボタンのコールバック
+	/// </summary>
+	private void OnRewardButton()
+	{
+		//googleAds.ShowReawrd();
+	}
+
 	void Start()
 	{
 
@@ -82,6 +93,8 @@ public class Title : MonoBehaviour
 		{
 			optionObj.SetActive(true);
 		});
+		//googleAdMobBanner.FirstSetting();
+		//googleAdMobBanner.RequestBanner(GoogleMobileAds.Api.AdSize.Banner, GoogleMobileAds.Api.AdPosition.Bottom);
 		
 	}
 
@@ -90,8 +103,10 @@ public class Title : MonoBehaviour
 	public void onStartButton(int num)
 	{
 		//�@�I�������ԍ�
+		//googleAdMobBanner.DestroyBanner();
 		PlayerManager.instance.stageNo = num;
 		FadeManager.GetInstance().StartFadeOut("Main");
+
         
 	}
 	

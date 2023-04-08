@@ -29,13 +29,14 @@ public class ItemCreate : MonoBehaviour
     const int CAR = 0;
     const int COIN = 1;
     const int CONE = 2;
+    const int DASH = 3;
 
     //int型を変数currentTipIndexで宣言します。
     int currentTipIndex;
 
     private void Start()
     {
-        Debug.Log(" preInstantiate " + preInstantiate );
+        //Debug.Log(" preInstantiate " + preInstantiate );
     }
 
     // Update is called once per frame
@@ -81,6 +82,8 @@ public class ItemCreate : MonoBehaviour
             }else if (num <= coneTable[tableNo])
             {
                 nextStageTip = CONE;
+            }else if (num <= 20){
+                nextStageTip = DASH;
             }
 
             //int nextStageTip = Random.Range(0, stageTips.Length);
@@ -119,7 +122,27 @@ public class ItemCreate : MonoBehaviour
             
             int posX = Random.Range(-2, 1);
             int count = 0;
-            if (nextStageTip == CONE)
+            if (nextStageTip == DASH)
+            {
+                count = 1;
+                //コーンをx軸方向に一直線に生成
+                // 初級の場合は真ん中に配置
+                if (PlayerManager.instance.stageNo == 0)
+                {
+                    count = 1;
+                    posX = 0;
+                }
+                for (int j = 0; j < count; j ++)
+                {
+                    
+                    GameObject stageObject = (GameObject)Instantiate(
+                            stageTips[nextStageTip],
+                            new Vector3(posX + j, -0.3f, tipIndex * STAGE_TIP_SIZE),
+                            Quaternion.Euler(0, 180, 0));
+                    //生成したステージチップを管理リストに追加して、
+                    generatedStageList.Add(stageObject);
+                }
+            }else if (nextStageTip == CONE)
             {
                 posX = -4;
                 count = 10;

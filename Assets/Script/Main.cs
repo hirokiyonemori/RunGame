@@ -24,7 +24,7 @@ public class Main : MonoBehaviour
     {
         //SceneManager.LoadScene("Main");
         AudioManager.instance.loop(true);
-        googleAds.InterstitialShow();
+        googleAds.PlayInterstitial();
         FadeManager.GetInstance().StartFadeOut("Main");
     }
 

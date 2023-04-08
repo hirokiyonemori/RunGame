@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Coin
+  - CarTag
+  - GoalTag
+  - TrafficConeTag
+  - Dash
   layers:
   - Default
   - TransparentFX

@@ -48,19 +48,7 @@ public class SaveManager : MonoBehaviour
     }
     public void AllLoad()
     {
-        if (ES3.KeyExists(LANGUAGE))
-        {
-            Debug.Log("LANGUAGE2");
-            myValue = ES3.Load<int>(LANGUAGE);
-            
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[myValue];
-        }
-        else
-        {
-            Debug.Log("LANGUAGE");
-            ES3.Save<int>(LANGUAGE, 0);
-            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
-        }
+        
         
         if (ES3.KeyExists(COIN))
 		{
@@ -69,11 +57,13 @@ public class SaveManager : MonoBehaviour
         }
         if (ES3.KeyExists("Tutorial"))
 		{
-            //Debug.Log("Tutorial  ");
+            Debug.Log("Tutorial  ");
 		}
 		else
 		{
             ES3.Save<bool>("Tutorial", false);
+
+            Debug.Log("Tutorial  1");
         }
         if (ES3.KeyExists(SOUND_VALUE))
         {
@@ -89,7 +79,7 @@ public class SaveManager : MonoBehaviour
         }
         if (ES3.KeyExists(LIFE))
         {
-            //Debug.Log(LIFE + ES3.Load(LIFE));
+            Debug.Log(LIFE + ES3.Load(LIFE));
             ///int value = ES3.Load(LIFE);
             //AudioManager.instance.Setup(value); ;
         }
@@ -108,8 +98,21 @@ public class SaveManager : MonoBehaviour
         else
         {
             
-            ES3.Save(BGM_VALUE,1f);
-            AudioManager.instance.Setup(1f); ;
+            ES3.Save(BGM_VALUE, 0.7f);
+            AudioManager.instance.Setup(0.7f); 
+        }
+        if (ES3.KeyExists(LANGUAGE))
+        {
+            Debug.Log("LANGUAGE2");
+            myValue = ES3.Load<int>(LANGUAGE);
+            Debug.Log("myValue" + myValue);
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[myValue];
+        }
+        else
+        {
+            Debug.Log("LANGUAGE");
+            ES3.Save<int>(LANGUAGE, 0);
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
         }
     }
 

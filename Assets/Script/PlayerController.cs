@@ -139,11 +139,11 @@ public class PlayerController : MonoBehaviour
                 break;
             //　上級
             case StageNo.senior:
-                speed = 20;
+                speed = 10;
                 break;
             //　達人
             default:
-                speed = 30;
+                speed = 10;
                 break;
         }
 
