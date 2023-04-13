@@ -25,9 +25,9 @@ public class Title : MonoBehaviour
 	[SerializeField]
 	private Option m_option;
 	
-	public GoogleAds googleAds;
+	//public GoogleAds googleAds;
 
-	//public GoogleAdMobBanner googleAdMobBanner;
+	public GoogleAdMobBanner googleAdMobBanner;
 
 
 	/// <summary>
@@ -93,8 +93,8 @@ public class Title : MonoBehaviour
 		{
 			optionObj.SetActive(true);
 		});
-		//googleAdMobBanner.FirstSetting();
-		//googleAdMobBanner.RequestBanner(GoogleMobileAds.Api.AdSize.Banner, GoogleMobileAds.Api.AdPosition.Bottom);
+		googleAdMobBanner.FirstSetting();
+		googleAdMobBanner.RequestBanner(GoogleMobileAds.Api.AdSize.Banner, GoogleMobileAds.Api.AdPosition.Bottom);
 		
 	}
 

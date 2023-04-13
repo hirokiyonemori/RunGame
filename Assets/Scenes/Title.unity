@@ -3966,7 +3966,7 @@ MonoBehaviour:
   - {fileID: 1059656122}
   optionObj: {fileID: 3743671354390743119}
   m_option: {fileID: 408056822}
-  googleAds: {fileID: 1535492603}
+  googleAdMobBanner: {fileID: 1535492605}
 --- !u!4 &383371875 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4497011438508190, guid: 7446a392a730ac14d9cc70d21cf7ace0, type: 3}
@@ -14229,7 +14229,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1535492604}
-  - component: {fileID: 1535492603}
   - component: {fileID: 1535492605}
   m_Layer: 0
   m_Name: Ads
@@ -14238,18 +14237,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1535492603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535492602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a582216720eccd409a7cff0294cfb42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1535492604
 Transform:
   m_ObjectHideFlags: 0
@@ -16711,7 +16698,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1535492603}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GoogleAds, Assembly-CSharp
         m_MethodName: InterstitialShow
         m_Mode: 1

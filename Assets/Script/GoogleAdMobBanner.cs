@@ -57,7 +57,7 @@ public class GoogleAdMobBanner : MonoBehaviour
 	public void RequestBanner(AdSize size, AdPosition position)
 	{
 #if UNITY_ANDROID
-		string adUnitId = "ca-app-pub-3940256099942544/6300978111";
+		string adUnitId = "ca-app-pub-8148356110096114/9927259585";
 #elif UNITY_IOS
 		string adUnitId = "ca-app-pub-8148356110096114/9927259585";
 #else

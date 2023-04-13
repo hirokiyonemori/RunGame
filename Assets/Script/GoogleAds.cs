@@ -19,6 +19,8 @@ public class GoogleAds : MonoBehaviour
         MobileAds.Initialize(initStatus => { });
 
     }
+
+    /*
     //�L����\�����郁�\�b�h
     public void RequestInterstitial()
     {
@@ -37,7 +39,7 @@ public class GoogleAds : MonoBehaviour
         //this.interstitialAd = new InterstitialAd(adUnitId);
         //AdRequest request = new AdRequest.Builder().Build();
         //interstitialAd.LoadAd(request);
-    }
+    }*/
     
     
     //インタースティシャル広告を表示したいときに呼び出す
@@ -45,7 +47,7 @@ public class GoogleAds : MonoBehaviour
     {
 
 #if UNITY_ANDROID
-		string adUnitId = "ca-app-pub-3940256099942544/8691691433";
+		string adUnitId = "ca-app-pub-8148356110096114/4508284743";
 #elif UNITY_IOS
         string adUnitId = "ca-app-pub-8148356110096114/8676079053";
 #else
@@ -95,9 +97,9 @@ public class GoogleAds : MonoBehaviour
     private void InitInterstitial()
     {
 #if UNITY_ANDROID
-		string adUnitId = "ca-app-pub-3940256099942544/8691691433";
+		string adUnitId = "ca-app-pub-8148356110096114/4508284743";
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+        string adUnitId = "ca-app-pub-8148356110096114/8676079053";
 #else
 		string adUnitId = "unexpected_platform";
 #endif
