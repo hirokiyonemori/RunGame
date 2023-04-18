@@ -19,28 +19,6 @@ public class GoogleAds : MonoBehaviour
         MobileAds.Initialize(initStatus => { });
 
     }
-
-    /*
-    //�L����\�����郁�\�b�h
-    public void RequestInterstitial()
-    {
-#if UNITY_ANDROID
-        // privateでやらないと表示はされない
-        adUnitId = "ca-app-pub-8148356110096114/4508284743";  //�e�X�g
-#elif UNITY_IOS
-        //adUnitId = "�L�����j�b�gID���R�s�y�iiOS�j";  //�{��
-        
-        //adUnitId = "ca-app-pub-3940256099942544/4411468910";  //�e�X�g
-
-        //interstitialAd = new InterstitialAd(adUnitId);
-        //AdRequest request = new AdRequest.Builder().Build();
-
-#endif
-        //this.interstitialAd = new InterstitialAd(adUnitId);
-        //AdRequest request = new AdRequest.Builder().Build();
-        //interstitialAd.LoadAd(request);
-    }*/
-    
     
     //インタースティシャル広告を表示したいときに呼び出す
     public void InterstitialShow()
