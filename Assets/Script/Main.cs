@@ -5,18 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    
-    public GoogleAds googleAds = null;
+
+    //public GoogleAds googleAds = null;
+    AdmobLibrary admobLibrary;
 
     void Start()
     {
-       // googleAds.ShowInterstitialAd();
-       FadeManager.GetInstance().StartFadeIn();
+        // googleAds.ShowInterstitialAd();
+        FadeManager.GetInstance().StartFadeIn();
+        admobLibrary = new AdmobLibrary();
+        admobLibrary.FirstSetting();
     }
 
     void Update()
     {
-        
+
     }
 
     // 再スタートする
@@ -24,7 +27,7 @@ public class Main : MonoBehaviour
     {
         //SceneManager.LoadScene("Main");
         AudioManager.instance.loop(true);
-        googleAds.PlayInterstitial();
+        admobLibrary.PlayInterstitial();
         FadeManager.GetInstance().StartFadeOut("Main");
     }
 

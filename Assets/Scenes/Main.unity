@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6324961, g: 0.8733255, b: 0.988331, a: 1}
+  m_IndirectSpecularColor: {r: 0.63419765, g: 0.87348187, b: 0.9865212, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1460,7 +1460,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335972471
 GameObject:
@@ -2236,7 +2236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f69b5bcd8aa174baa7e53676e18ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  googleAds: {fileID: 910148754}
 --- !u!4 &697808962
 Transform:
   m_ObjectHideFlags: 0
@@ -2638,50 +2637,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
---- !u!1 &910148753
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 910148755}
-  - component: {fileID: 910148754}
-  m_Layer: 0
-  m_Name: GoogleAds
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &910148754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910148753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a582216720eccd409a7cff0294cfb42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &910148755
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910148753}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5717154, y: 4.1451416, z: 4.899063}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &914190277
 GameObject:
   m_ObjectHideFlags: 0
